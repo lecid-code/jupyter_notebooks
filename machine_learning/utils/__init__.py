@@ -6,6 +6,7 @@ machine learning classifiers with both numerical metrics and visualizations.
 """
 
 from .classification import run_classifier, print_classifier_metrics
+from .regression import run_regressor
 
 __version__ = "1.0.0"
-__all__ = ['run_classifier', 'print_classifier_metrics']
+__all__ = ['run_classifier', 'print_classifier_metrics', 'run_regressor']
