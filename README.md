@@ -12,11 +12,9 @@ This repository contains all coursework, projects, assignments, and learning mat
 - [Kaggle](https://www.kaggle.com/) - Datasets and competitions
 - [Papers with Code](https://paperswithcode.com/) - Latest research papers
 - [Towards Data Science](https://towardsdatascience.com/) - Articles and tutorials
-- [Coursera ML Course](https://www.coursera.org/learn/machine-learning) - Supplementary learning
 
 ### Useful Documentation
 - [Scikit-learn Documentation](https://scikit-learn.org/stable/documentation.html)
-- [TensorFlow Documentation](https://www.tensorflow.org/api_docs)
 - [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
 - [Pandas Documentation](https://pandas.pydata.org/docs/)
 
