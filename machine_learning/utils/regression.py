@@ -7,11 +7,12 @@ from sklearn.model_selection import train_test_split
 DEFAULT_TRAIN_SIZE = 0.8
 DEFAULT_MODEL_DESCRIPTION = 'default'
 
-def _adjusted_r2(y_true, y_pred, n_features):
+def _adjusted_r2(r2, n_observations, k_features):
     """Calculate adjusted R-squared"""
-    n = len(y_true)
-    r2 = metrics.r2_score(y_true, y_pred)
-    return 1 - (1 - r2) * (n - 1) / (n - n_features - 1)
+    if n_observations - k_features == 1:
+        return 0
+        
+    return 1 - ((1 - r2) * (n_observations - 1) / (n_observations - k_features - 1))
 
 def run_regressor(model: RegressorMixin,
                   X: np.ndarray | pd.DataFrame, 
@@ -43,17 +44,19 @@ def run_regressor(model: RegressorMixin,
     mae_train = metrics.mean_absolute_error(y_train, y_train_pred)
     mape_train = metrics.mean_absolute_percentage_error(y_train, y_train_pred)
     r2_train = metrics.r2_score(y_train, y_train_pred)
-    adj_r2_train = _adjusted_r2(y_train, y_train_pred, X.shape[1])
+    adj_r2_train = _adjusted_r2(r2_train, len(X_train), X.shape[1])
     
     # Calculate test metrics
     rmse_test = metrics.root_mean_squared_error(y_test, y_test_pred)
     mae_test = metrics.mean_absolute_error(y_test, y_test_pred)
     mape_test = metrics.mean_absolute_percentage_error(y_test, y_test_pred)
+    r2_test = metrics.r2_score(y_test, y_test_pred)
+    adj_r2_test = _adjusted_r2(r2_test, len(X_test), X.shape[1])
     
     # Combine all metrics
     all_metrics = [
         rmse_train, mae_train, mape_train, r2_train, adj_r2_train,
-        rmse_test, mae_test, mape_test
+        rmse_test, mae_test, mape_test, r2_test, adj_r2_test
     ]
     
     # Format metrics to 3 decimal places
